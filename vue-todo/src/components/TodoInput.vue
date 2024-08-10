@@ -1,5 +1,6 @@
 <template>
   <div class="inputBox">
+<!-- v-on:keyup.enter로 버튼 구현  -->
     <input type="text" v-model="newTodoItem" v-on:keyup.enter="addTodo">
 <!--    <button v-on:click="addTodo">add</button>-->
     <span class="addContainer" v-on:click="addTodo">
