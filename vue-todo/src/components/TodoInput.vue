@@ -18,6 +18,7 @@ export default {
   },
   methods: {
     addTodo() {
+      // localStorage 는 순서대로 저장하지 않음.
       localStorage.setItem(this.newTodoItem,this.newTodoItem);
       this.clearInput()
     },
