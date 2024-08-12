@@ -1,7 +1,7 @@
 <template>
   <div>
     <header>
-      <h1>TODO it!</h1>
+      <h1>DO it!</h1>
     </header>
   </div>
 </template>
