@@ -18,9 +18,13 @@ export default {
   },
   methods: {
     addTodo() {
-      // localStorage 는 순서대로 저장하지 않음.
-      localStorage.setItem(this.newTodoItem,this.newTodoItem);
-      this.clearInput()
+      if (this.newTodoItem !== '') {
+        var obj = {completed: false, item:this.newTodoItem};
+        // localStorage 는 순서대로 저장하지 않음.
+        // stringify 를 사용하면 스트링 문자열로 들어간다.
+        localStorage.setItem(this.newTodoItem,JSON.stringify(obj));
+        this.clearInput();
+      }
     },
     clearInput() {
       this.newTodoItem = "";
