@@ -1,7 +1,7 @@
 <template>
   <div>
     <ul>
-      <li v-bind:key="todoItem.item" v-for="(todoItem, index) in todoItems" class="shadow">
+      <li v-bind:key="todoItem.item" v-for="(todoItem, index) in propsdata">
         <!-- completed가 true냐 false냐에 따라 스타일이 적용 되는지 안되는지 구현-->
         <i class="fas fa-check checkBtn"
            v-bind:class="{checkBtnCompleted: todoItem.completed}"
@@ -17,16 +17,17 @@
 
 <script>
 export default {
-  data() {
-    return {
-      todoItems: []
-    }
-  },
+  // data() {
+  //   return {
+  //     todoItems: []
+  //   }
+  // },
+  props: ['propsdata'],
   methods: {
     removeTodo(todoItem, index) {
-      // console.log(todoItem, index);
-      localStorage.removeItem(todoItem);
-      this.todoItems.splice(index, 1);
+      this.$emit('removeItem', todoItem, index)
+      // localStorage.removeItem(todoItem.item);
+      // this.todoItems.splice(index, 1);
     },
     toggleComplete(todoItem, index) {
       todoItem.completed = !todoItem.completed;
@@ -34,17 +35,6 @@ export default {
       localStorage.setItem(todoItem.item, JSON.stringify(todoItem));
     }
   },
-  created() { // 뷰 라이프사이클 훅
-    if (localStorage.length > 0) {
-      for (var i = 0; i < localStorage.length; i++) {
-        if (localStorage.key(i) !== 'loglevel:webpack-dev-server') {
-          // JSON.parse 하면 스트링으로만 들어온걸 객체로 바꿔줌
-          this.todoItems.push(JSON.parse(localStorage.getItem(localStorage.key(i))))
-          // this.todoItems.push(localStorage.key(i))
-        }
-      }
-    }
-  }
 }
 </script>
 
