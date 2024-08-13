@@ -1,9 +1,11 @@
 <template>
   <div id="app">
     <TodoHeader></TodoHeader>
-    <TodoInput v-on:addTodoItem ='addOneItem'></TodoInput>
-    <TodoList v-bind:propsdata="todoItems" v-on:removeItem="removeOneItem"></TodoList>
-    <TodoFooter></TodoFooter>
+    <TodoInput v-on:addTodoItem='addOneItem'></TodoInput>
+    <TodoList v-bind:propsdata="todoItems"
+              v-on:removeItem="removeOneItem"
+              v-on:toggleItem="toggleOneItem"></TodoList>
+    <TodoFooter v-on:clearAll="clearAllItems"></TodoFooter>
   </div>
 </template>
 
@@ -20,16 +22,24 @@ export default {
     }
   },
   methods: {
+    clearAllItems() {
+      localStorage.clear()
+      this.todoItems = []
+    },
     removeOneItem(todoItem, index) {
       localStorage.removeItem(todoItem.item);
       this.todoItems.splice(index, 1);
     },
     addOneItem(todoItem) {
       var obj = {completed: false, item: todoItem};
-
       localStorage.setItem(todoItem, JSON.stringify(obj));
       this.todoItems.push(obj)
-    }
+    },
+    toggleOneItem(todoItem, index) {
+      this.todoItems[index].completed = !this.todoItems[index].completed;
+      localStorage.removeItem(todoItem.item)
+      localStorage.setItem(todoItem.item, JSON.stringify(todoItem));
+    },
   },
   created() { // 뷰 라이프사이클 훅
     if (localStorage.length > 0) {
@@ -55,14 +65,17 @@ body {
   text-align: center;
   background-color: #F6F6F6;
 }
+
 input {
-  border-style:groove;
+  border-style: groove;
   width: 200px;
 }
+
 button {
   border-style: groove;
 }
+
 .shadow {
-  box-shadow: 5px 10px 10px white ;
+  box-shadow: 5px 10px 10px white;
 }
 </style>
