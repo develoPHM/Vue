@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ul>
+    <transition-group name="list" tag="ul">
       <li v-bind:key="todoItem.item" v-for="(todoItem, index) in propsdata">
         <!-- completed가 true냐 false냐에 따라 스타일이 적용 되는지 안되는지 구현-->
         <i class="fas fa-check checkBtn"
@@ -11,7 +11,7 @@
           <i class="fas fa-trash-alt"></i>
         </span>
       </li>
-    </ul>
+    </transition-group>
   </div>
 </template>
 
@@ -74,5 +74,12 @@ li {
 .removeBtn {
   margin-left: auto;
   color: #de4343;
+}
+.list-enter-active, .list-leave-active {
+  transition: all 1s;
+}
+.list-enter, .list-leave-to {
+  opacity: 0;
+  transform: translateY(30px);
 }
 </style>
