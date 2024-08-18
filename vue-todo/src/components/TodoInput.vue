@@ -8,7 +8,7 @@
     <span class="addContainer" v-on:click="addTodo">
       <i class="fas fa-plus addBtn"></i>
     </span>
-    <Modal v-if="showModal" @close="showModal = false">
+    <Modal v-if="showModal" v-on:click="showModal = false">
       <h3 slot="header" class="closeModalBtn">
         경고
         <i class="fas fa-times" v-on:click="showModal = false"></i>
@@ -35,19 +35,21 @@ export default {
   },
   methods: {
     addTodo() {
-      if (this.newTodoItem !== '') {
-        this.$emit('addTodoItem', this.newTodoItem)
-        this.clearInput();
-      } else {
+      if (this.newTodoItem === '') {
         this.showModal = !this.showModal
+        return
       }
+      this.$emit('addTodoItem', this.newTodoItem)
+      this.clearInput();
+
     },
     clearInput() {
       this.newTodoItem = '';
     }
   },
   components: {
-    Modal: Modal
+    // Modal: Modal 생략 가능
+    Modal
   }
 }
 </script>
@@ -81,6 +83,7 @@ input:focus {
   color: white;
   vertical-align: middle;
 }
+
 .closeModalBtn {
   color: #42b983;
 }
