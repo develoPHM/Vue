@@ -17,21 +17,12 @@
 
 <script>
 export default {
-  // data() {
-  //   return {
-  //     todoItems: []
-  //   }
-  // },
-  props: ['propsdata'],
   methods: {
     removeTodo(todoItem, index) {
-      this.$emit('removeItem', todoItem, index)
-      // localStorage.removeItem(todoItem.item);
-      // this.todoItems.splice(index, 1);
+      this.$store.commit('removeOneItem', {todoItem, index});
     },
     toggleComplete(todoItem, index) {
-      this.$emit('toggleItem', todoItem, index);
-
+      this.$store.commit('toggleOneItem', {todoItem, index});
     }
   },
 }
@@ -75,9 +66,11 @@ li {
   margin-left: auto;
   color: #de4343;
 }
+
 .list-enter-active, .list-leave-active {
   transition: all 1s;
 }
+
 .list-enter, .list-leave-to {
   opacity: 0;
   transform: translateY(30px);
