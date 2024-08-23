@@ -5,7 +5,7 @@
         <!-- completed가 true냐 false냐에 따라 스타일이 적용 되는지 안되는지 구현-->
         <i class="fas fa-check checkBtn"
            v-bind:class="{checkBtnCompleted: todoItem.completed}"
-           v-on:click="toggleComplete(todoItem, index)"></i>
+           v-on:click="toggleComplete({todoItem, index})"></i>
         <span v-bind:class="{textCompleted: todoItem.completed}">{{ todoItem.item }}</span>
         <span class="removeBtn" v-on:click="removeTodo({todoItem, index})">
           <i class="fas fa-trash-alt"></i>
@@ -22,15 +22,16 @@ export default {
   methods: {
     ...mapMutations({
       removeTodo: 'removeOneItem',
-    }),
-
-    // removeTodo(todoItem, index) {
-    //   this.$store.commit('removeOneItem', {todoItem, index});
-    // },
-    toggleComplete(todoItem, index) {
-      this.$store.commit('toggleOneItem', {todoItem, index});
-    }
+      toggleComplete: 'toggleOneItem'
+    })
   },
+  // removeTodo(todoItem, index) {
+  //   this.$store.commit('removeOneItem', {todoItem, index});
+  // },
+  //   toggleComplete(todoItem, index) {
+  //     this.$store.commit('toggleOneItem', {todoItem, index});
+  //   }
+  // },
   computed: {
     // todoItems() {
     //   return this.$store.getters.storedTodoItems;
