@@ -15,12 +15,6 @@ import {ref} from 'vue';
 export default {
   components: {TodoInput, TodoHeader, TodoList},
 
-  // methods: {
-  //   removeTodoItem(item, index) {
-  //     this.todoItems.splice(index,1);
-  //     localStorage.removeItem(item);
-  //   }
-  // },
   setup() {
     const todoItems = ref([])
 
