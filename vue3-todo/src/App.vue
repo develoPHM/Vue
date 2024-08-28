@@ -1,6 +1,6 @@
 <template>
   <TodoHeader></TodoHeader>
-  <!--  <TodoInput @하위컴포넌트 이벤트 이름="상위컴포넌트의 메서드 이름"></TodoInput>-->
+  <!--  <TodoInput @하위컴포넌트 이벤트 이름="상위컴포넌트의 메서드 이름."></TodoInput>-->
   <TodoInput @add="addTodoItem"></TodoInput>
   <!--<TodoList :하위프롭스이름="상위컴포넌트의 데이터이름" -->
   <TodoList :todoItems="todoItems" @remove="removeTodoItem"></TodoList>
