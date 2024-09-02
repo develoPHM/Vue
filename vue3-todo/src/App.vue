@@ -10,37 +10,25 @@
 import TodoHeader from '@/components/TodoHeader.vue';
 import TodoInput from '@/components/TodoInput.vue';
 import TodoList from '@/components/TodoList.vue';
-import {ref} from 'vue';
+import {useTodo} from '@/hooks/useTodo';
 
 export default {
   components: {TodoInput, TodoHeader, TodoList},
 
   setup() {
-    const todoItems = ref([])
+    const {
+      todoItems,
+      addTodoItem,
+      // fetchTodos
+    } = useTodo();
 
-    function fetchTodos() {
-      const result = []
-      for (let i = 0; i < localStorage.length; i++) {
-        const todoItem = localStorage.key(i);
-        result.push(todoItem)
-        // items.value.push(todoItem)
-      }
-      return result
-    }
-
-    todoItems.value = fetchTodos();
-
-    function addTodoItem(todo) {
-      todoItems.value.push(todo)
-      localStorage.setItem(todo, todo)
-    }
-
-    function removeTodoItem(todo,index) {
-      todoItems.value.splice(index,1);
+    return {todoItems, addTodoItem};
+  },
+  methods: {
+    removeTodoItem(todo, index) {
+      this.todoItems.splice(index, 1);
       localStorage.removeItem(todo)
     }
-    return {todoItems, addTodoItem, removeTodoItem};
-
   }
 }
 
