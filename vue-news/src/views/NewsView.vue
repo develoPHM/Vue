@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-for="user in users" :key="user.id">{{ users }}}</div>
+    <div v-for="user in users" :key="user.id">{{ user.title }}</div>
   </div>
 </template>
 
@@ -14,10 +14,9 @@ export default {
     }
   },
   created() {
-    let vm = this;
     fetchNewsList()
         .then(res => {
-          vm.users = res.data;
+          this.users = res.data;
         })
   }
 }
