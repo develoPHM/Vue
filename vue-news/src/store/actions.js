@@ -1,4 +1,4 @@
-import {fetchNewsList, fetchJobsList, fetchAskList} from '../api/index.js'
+import {fetchNewsList, fetchJobsList, fetchAskList,fetchUserInfo} from '../api/index.js'
 
 export default {
     FETCH_NEWS(context) {
@@ -18,6 +18,13 @@ export default {
         fetchJobsList()
             .then(res => {
                 context.commit('SET_JOBS', res.data)
+            })
+    },
+    // UserView 에서 name 넘겨받음
+    FETCH_USER(context, name) {
+        fetchUserInfo(name)
+            .then(res => {
+                context.commit('SET_USER', res.data)
             })
     }
 }

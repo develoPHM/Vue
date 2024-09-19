@@ -1,6 +1,9 @@
 <template>
   <div>
-    <div v-for="i in askItems" :key="i.id">{{ i.title }}</div>
+    <p v-for="i in askItems" :key="i.id">{{ i.title }}
+      <a v-bind:href="i.url">{{ i.title}}</a>
+      <small>{{ i.domain}}</small>
+    </p>
   </div>
 </template>
 
