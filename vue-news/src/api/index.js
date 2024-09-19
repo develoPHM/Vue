@@ -6,7 +6,6 @@ const config = {
 }
 // news api
 function fetchNewsList() {
-    // return axios.get(config.baseURL + 'news/1.json')
     return axios.get(`${config.baseURL}news/1.json`) // es6문법
 }
 
