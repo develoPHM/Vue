@@ -1,35 +1,35 @@
-import {fetchNewsList, fetchJobsList, fetchAskList,fetchUserInfo,fetchItem} from '../api/index.js'
+import {fetchNewsList, fetchJobsList, fetchAskList, fetchUserInfo, fetchItem} from '../api/index.js'
 
 export default {
-    FETCH_NEWS(context) {
+    FETCH_NEWS({commit}) {
         fetchNewsList()
             .then(res => {
-                context.commit('SET_NEWS', res.data)
+                commit('SET_NEWS', res.data)
             })
     },
-    FETCH_ASKS(context) {
+    FETCH_ASKS({commit}) {
         fetchAskList()
             .then(res => {
-                context.commit('SET_ASKS', res.data)
+                commit('SET_ASKS', res.data)
             })
     },
-    FETCH_JOBS(context) {
+    FETCH_JOBS({commit}) {
         fetchJobsList()
             .then(res => {
-                context.commit('SET_JOBS', res.data)
+                commit('SET_JOBS', res.data)
             })
     },
     // UserView 에서 name 넘겨받음
-    FETCH_USER(context, name) {
+    FETCH_USER({commit}, name) {
         fetchUserInfo(name)
             .then(res => {
-                context.commit('SET_USER', res.data)
+                commit('SET_USER', res.data)
             })
     },
-    FETCH_ITEM(context, id) {
+    FETCH_ITEM({commit}, id) {
         fetchItem(id)
             .then(res => {
-                context.commit('SET_ITEM', res.data)
+                commit('SET_ITEM', res.data)
             })
     }
 }
