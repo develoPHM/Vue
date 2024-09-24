@@ -29,4 +29,15 @@ body {
 .page-enter-from, .page-leave-to {
   opacity: 0;
 }
+a {
+  color: #35495e;
+  text-decoration: none;
+}
+a.router-link-exact-active {
+  text-decoration: underline;
+}
+a:hover {
+  color: #42b833;
+  text-decoration: underline;
+}
 </style>
