@@ -38,8 +38,7 @@
 
 <script>
 export default {
-  // created() {
-  //   const name = this.$route.name
+  created() {
   //   if (name === 'news') {
   //     this.$store.dispatch('FETCH_NEWS')
   //   } else if (name === 'ask') {
@@ -47,7 +46,7 @@ export default {
   //   } else if (name === 'jobs') {
   //     this.$store.dispatch('FETCH_JOBS')
   //   }
-  // },
+  },
   computed: {
     // eslint-disable-next-line vue/return-in-computed-property
     listItems() {
