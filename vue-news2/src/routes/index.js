@@ -13,19 +13,22 @@ export const router = new VueRouter({
     routes: [
         {
             path: '/',
-            redirect: '/news'
+            redirect: '/news',
         },
         {
             path: '/news',
-            component: NewsView
+            component: NewsView,
+            name: 'news'
         },
         {
-            path: '/ask',
-            component: AskView
+            path: '/asks',
+            component: AskView,
+            name: 'asks'
         },
         {
             path: '/jobs',
-            component: JobsView
+            component: JobsView,
+            name: 'jobs'
         },
         {
             path: '/user/:id',
