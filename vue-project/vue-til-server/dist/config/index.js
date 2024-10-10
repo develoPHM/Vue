@@ -1,0 +1,9 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.SECRET_KEY = exports.EXPIRATION_DATE = void 0;
+const SECRET_KEY = exports.SECRET_KEY = 'vuex-with-token';
+const EXPIRATION_DATE = exports.EXPIRATION_DATE = '100d';
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6WyJTRUNSRVRfS0VZIiwiZXhwb3J0cyIsIkVYUElSQVRJT05fREFURSJdLCJzb3VyY2VzIjpbIi4uLy4uL3NyYy9jb25maWcvaW5kZXguanMiXSwic291cmNlc0NvbnRlbnQiOlsiZXhwb3J0IGNvbnN0IFNFQ1JFVF9LRVkgPSAndnVleC13aXRoLXRva2VuJztcbmV4cG9ydCBjb25zdCBFWFBJUkFUSU9OX0RBVEUgPSAnMTAwZCc7XG4iXSwibWFwcGluZ3MiOiI7Ozs7OztBQUFPLE1BQU1BLFVBQVUsR0FBQUMsT0FBQSxDQUFBRCxVQUFBLEdBQUcsaUJBQWlCO0FBQ3BDLE1BQU1FLGVBQWUsR0FBQUQsT0FBQSxDQUFBQyxlQUFBLEdBQUcsTUFBTSIsImlnbm9yZUxpc3QiOltdfQ==
