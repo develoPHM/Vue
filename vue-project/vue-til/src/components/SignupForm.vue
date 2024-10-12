@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import { registerUser } from '@/api/index'
+import { registerUser } from '@/api'
 export default {
   data() {
     return {
@@ -33,7 +33,7 @@ export default {
         username: this.username,
         password: this.password,
         nickname: this.nickname
-      }
+      };
       registerUser(userData)
     }
 
