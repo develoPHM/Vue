@@ -1,7 +1,9 @@
 <template>
-  <div>
+  <div class="app">
     <app-header></app-header>
-    <router-view></router-view>
+    <div class="app-contents">
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
@@ -9,14 +11,13 @@
 import AppHeader from "./components/AppHeader";
 
 export default {
-  created() {
-
-  },
-
   components: {
     AppHeader
   }
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+@import '@/css/reset.css';
+@import '@/css/common.css';
+</style>
