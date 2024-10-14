@@ -7,8 +7,11 @@
 
 <script>
 import AppHeader from "./components/AppHeader";
+
 export default {
-  created() {},
+  created() {
+
+  },
 
   components: {
     AppHeader
