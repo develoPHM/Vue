@@ -16,22 +16,21 @@ import docs from './utils/api-doc.js';
 import { authenticateUser } from './utils/auth.js';
 
 // mongo db
+require('dotenv').config();
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
-mongoose.connect(
-  'mongodb+srv://test:1q2w3e4r@project.k7oeb.mongodb.net/?retryWrites=true&w=majority&appName=Project',
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  },
-);
+mongoose.connect(process.env.DB_PASSWORD, {
+  useNewUrlParser: true
+});
 mongoose.Promise = global.Promise;
 
 // server setup
 let port;
+
 async function configServer() {
   port = 3000 || (await detectPort(3000));
 }
+
 configServer();
 
 // express setup

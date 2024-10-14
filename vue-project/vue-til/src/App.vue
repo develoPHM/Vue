@@ -6,16 +6,14 @@
 </template>
 
 <script>
-import AppHeader from './components/AppHeader'
+import AppHeader from "./components/AppHeader";
 export default {
-  created() {
-  },
+  created() {},
+
   components: {
     AppHeader
   }
-}
+};
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

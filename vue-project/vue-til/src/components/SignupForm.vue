@@ -12,7 +12,8 @@
       <label for="nickname">nickname: </label>
       <input id="nickname" type="text" v-model="nickname" />
     </div>
-    <button type="submit">로그인</button>
+    <button type="submit">회원가입</button>
+    <p> {{ msg }}</p>
   </form>
 </template>
 
@@ -23,20 +24,28 @@ export default {
     return {
       username: '',
       password: '',
-      nickname: ''
+      nickname: '',
+      msg: '',
     }
   },
   methods: {
-    submitForm () {
+    async submitForm () {
       console.log('제출')
       const userData = {
         username: this.username,
         password: this.password,
         nickname: this.nickname
       };
-      registerUser(userData)
+      const res = await registerUser(userData)
+      console.log(res.data)
+      this.msg = `${this.username} 님이 가입되었습니다.`
+      this.initForm()
+    },
+    initForm() {
+      this.username = '';
+      this.password = '';
+      this.nickname = '';
     }
-
   }
 }
 </script>
