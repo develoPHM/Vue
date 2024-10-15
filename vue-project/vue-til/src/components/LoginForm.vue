@@ -53,8 +53,11 @@ export default {
           password: this.password,
         }
         const res = await loginUser(userData)
-        this.logmsg = `${res.data.user.username} 님 환영합니다.`
-        console.log(res.data.user.username)
+        // 메인페이지로이동
+        console.log(res.data.token)
+        this.$store.commit('setToken', res.data.token)
+        this.$store.commit('setUername', res.data.user.username)
+        await this.$router.push('/main');
       } catch (err) {
         console.log(err.response);
         this.logmsg = err.response.data
