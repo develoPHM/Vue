@@ -31,6 +31,7 @@
 <script>
 import { loginUser } from "@/api";
 import { validateEmail } from "@/utils/validation";
+import { saveAuthToCookie, saveUserToCookie } from "@/utils/cookies";
 
 export default {
   data() {
@@ -54,9 +55,10 @@ export default {
         }
         const res = await loginUser(userData)
         // 메인페이지로이동
-        console.log(res.data.token)
-        this.$store.commit('setToken', res.data.token)
+        this.$store.commit('setToken', res.data.token )
         this.$store.commit('setUername', res.data.user.username)
+        saveAuthToCookie(res.data.token)
+        saveUserToCookie(res.data.user.username)
         await this.$router.push('/main');
       } catch (err) {
         console.log(err.response);
