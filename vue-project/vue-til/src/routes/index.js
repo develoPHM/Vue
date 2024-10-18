@@ -1,13 +1,14 @@
 import Vue from 'vue';
-import router from 'vue-router';
-Vue.use(router);
+import VueRouter from 'vue-router';
+import { store } from "@/store";
+Vue.use(VueRouter);
 
-export default new router({
+const router = new VueRouter({
     mode: 'history',
     routes: [
         {
             path:'/',
-            redirect: '/login'
+            redirect: `${store.getters.isLogin ? '/main' : '/login'}`,
         },
         {
             path: '/login',
@@ -19,11 +20,13 @@ export default new router({
         },
         {
             path: '/main',
-            component: () => import('@/views/MainPage.vue')
+            component: () => import('@/views/MainPage.vue'),
+            meta: { auth: true}
         },
         {
             path: '/add',
-            component: () => import('@/views/PostAddPage.vue')
+            component: () => import('@/views/PostAddPage.vue'),
+            meta: { auth: true}
         },
         {
             path: '*',
@@ -31,3 +34,14 @@ export default new router({
         }
     ]
 })
+
+router.beforeEach((to, from, next) => {
+    if (to.meta.auth && !store.getters.isLogin) {
+        console.log('인증이 필요합니다.')
+        next('/login')
+        return; // 밑의 next() 실행 굳이 안시키기
+    }
+    next();
+})
+
+export default router;

@@ -19,8 +19,9 @@ export const store = new Vuex.Store({
         setUername (state, username) {
             state.username = username;
         },
-        clearUername (state) {
+        clearUser (state) {
             state.username = '';
+            state.token= '';
         },
         setToken(state, token) {
             state.token = token;
@@ -35,6 +36,7 @@ export const store = new Vuex.Store({
             saveAuthToCookie(res.data.token)
             saveUserToCookie(res.data.user.username)
             // return data
-        }
+        },
     }
 })
+

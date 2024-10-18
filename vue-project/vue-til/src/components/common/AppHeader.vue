@@ -1,7 +1,7 @@
 <template>
   <header>
     <div>
-      <router-link to="/" class="logo">
+      <router-link :to="logoLink" class="logo">
         홈
       </router-link>
     </div>
@@ -21,15 +21,21 @@
 </template>
 
 <script>
+import { deleteCookie } from "@/utils/cookies";
 export default {
   computed: {
     isUserLogin() {
       return this.$store.getters.isLogin
     },
+    logoLink() {
+      return this.$store.getters.isLogin ? '/main' : '/login'
+    }
   },
   methods: {
     logoutUser() {
-      this.$store.commit('clearUername');
+      deleteCookie('til_auth')
+      deleteCookie('til_user')
+      this.$store.commit('clearUser');
       this.$router.push('/login')
     }
   }

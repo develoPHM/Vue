@@ -30,9 +30,6 @@ function createPost(postData) {
     return instance.post('posts', postData);
 }
 
-// function deletePost(postId) {
-//     return instance.delete(`posts/${postId}`);  // URL에 postId를 포함시킴
-// }
 function deletePost(postId) {
     return instance.delete(`posts/${postId}`);  // URL에 postId를 포함시킴
 }
