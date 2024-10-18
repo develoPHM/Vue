@@ -2,7 +2,7 @@
   <header>
     <div>
       <router-link to="/" class="logo">
-        TIL
+        홈
       </router-link>
     </div>
     <div class="navigations">

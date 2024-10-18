@@ -8,7 +8,7 @@ function createInstance() {
     });
     return setInterceptors(instance);
 }
-const instance = createInstance();
+const instance = createInstance(); // 기본 url 넣어주는 인스턴스
 
 // 회원가입 API
 function registerUser(userData) {
@@ -23,6 +23,19 @@ function loginUser(userData) {
 // 학습 노트 데이터를 조회하는 API
 function fetchPosts() {
     return instance.get('posts');
-
 }
-export { registerUser, loginUser, fetchPosts };
+
+// 학습 노트 데이터를 생성하는 API
+function createPost(postData) {
+    return instance.post('posts', postData);
+}
+
+// function deletePost(postId) {
+//     return instance.delete(`posts/${postId}`);  // URL에 postId를 포함시킴
+// }
+function deletePost(postId) {
+    return instance.delete(`posts/${postId}`);  // URL에 postId를 포함시킴
+}
+
+
+export { registerUser, loginUser, fetchPosts, createPost, deletePost };

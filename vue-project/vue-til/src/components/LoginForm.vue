@@ -4,7 +4,7 @@
       <form @submit.prevent="submitForm" class="form">
         <div>
           <label for="username">id:</label>
-          <input id="username" type="text" v-model="username" />
+          <input id="username" type="text" v-model="username"/>
           <p class="validation-text">
             <span class="warning" v-if="!isUsernameValid && username">
               Please enter an email address
@@ -29,15 +29,13 @@
 </template>
 
 <script>
-import { loginUser } from "@/api";
 import { validateEmail } from "@/utils/validation";
-import { saveAuthToCookie, saveUserToCookie } from "@/utils/cookies";
 
 export default {
   data() {
     return {
-      username: '',
-      password: '',
+      username: 'p@h.m',
+      password: '1234',
       logmsg: ''
     };
   },
@@ -53,13 +51,8 @@ export default {
           username: this.username,
           password: this.password,
         }
-        const res = await loginUser(userData)
-        // 메인페이지로이동
-        this.$store.commit('setToken', res.data.token )
-        this.$store.commit('setUername', res.data.user.username)
-        saveAuthToCookie(res.data.token)
-        saveUserToCookie(res.data.user.username)
-        await this.$router.push('/main');
+        await this.$store.dispatch('LOGIN', userData)
+        await   this.$router.push('/main');
       } catch (err) {
         console.log(err.response);
         this.logmsg = err.response.data
