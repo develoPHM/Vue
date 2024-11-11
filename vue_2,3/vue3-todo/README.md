@@ -1,4 +1,4 @@
-# vue-todo
+# vue3-todo
 
 ## Project setup
 ```
@@ -19,3 +19,6 @@ npm run build
 ```
 npm run lint
 ```
+
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).
