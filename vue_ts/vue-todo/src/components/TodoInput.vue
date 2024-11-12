@@ -20,7 +20,6 @@ export default Vue.extend({
   methods: {
     // input 이벤트 발생
     handleInput(event: InputEvent): void {
-      console.log(event);
       // if (!event.target) {
       //   return;
       // }
