@@ -2,7 +2,7 @@
   <div>
     <label for="todo-input">오늘 할 일</label>
     <input id="todo-input" type="text" :value="item" @input="handleInput" />
-    <button @click="addTodo" type="button">add</button>
+    <button @click="addTodo" type="button">추가</button>
   </div>
 </template>
 
@@ -17,11 +17,12 @@ export default Vue.extend({
     },
   },
   methods: {
-    // input 이벤트 발생
+    // input 변경 이벤트 발생
     handleInput(event: InputEvent): void {
       const eventTarget = event.target as HTMLInputElement;
       this.$emit('input', eventTarget.value);
     },
+    // 추가버튼 이벤트를 상위 컴포넌트로 올리는 함수
     addTodo() {
       this.$emit('add');
     },
