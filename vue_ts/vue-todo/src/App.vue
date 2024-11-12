@@ -11,6 +11,8 @@
             v-for="(todoItem, index) in todoItems"
             :key="index"
             :todoItem="todoItem"
+            :index="index"
+            @delete="removeTodoItem"
           ></TodoListItem>
         </ul>
       </div>
@@ -28,6 +30,11 @@ const storage = {
   save(value: any) {
     const parsed = JSON.stringify(value);
     localStorage.setItem(STORAGE_KEY, parsed);
+  },
+  fetch() {
+    const todoItems = localStorage.getItem(STORAGE_KEY) || '[]';
+    console.log(todoItems);
+    return JSON.parse(todoItems);
   },
 };
 
@@ -53,6 +60,17 @@ export default Vue.extend({
     initTodoText() {
       this.todoText = '';
     },
+    removeTodoItem(index: number) {
+      console.log('삭제', index);
+      this.todoItems.splice(index, 1);
+      storage.save(this.todoItems);
+    },
+    fetchTodoItems() {
+      this.todoItems = storage.fetch();
+    },
+  },
+  created() {
+    this.fetchTodoItems();
   },
 });
 </script>

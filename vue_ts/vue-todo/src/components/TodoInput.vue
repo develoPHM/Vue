@@ -10,7 +10,6 @@
 import Vue from 'vue';
 
 export default Vue.extend({
-  // props: ['item'],
   props: {
     item: {
       type: String,
@@ -20,9 +19,6 @@ export default Vue.extend({
   methods: {
     // input 이벤트 발생
     handleInput(event: InputEvent): void {
-      // if (!event.target) {
-      //   return;
-      // }
       const eventTarget = event.target as HTMLInputElement;
       this.$emit('input', eventTarget.value);
     },
