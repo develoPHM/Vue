@@ -13,6 +13,7 @@
             :todoItem="todoItem"
             :index="index"
             @delete="removeTodoItem"
+            @toggle="toggleTodoItemComplete"
           ></TodoListItem>
         </ul>
       </div>
@@ -42,12 +43,17 @@ const storage = {
   },
 };
 
+export interface Todo {
+  title: string;
+  done: boolean;
+}
+
 export default Vue.extend({
   components: { TodoListItem, TodoInput },
   data() {
     return {
       todoText: '',
-      todoItems: [] as any[],
+      todoItems: [] as Todo[],
     };
   },
   methods: {
@@ -58,7 +64,11 @@ export default Vue.extend({
     // 새로운 데이터 추가할 때 호출
     addTodoItem() {
       const value = this.todoText;
-      this.todoItems.push(value);
+      const todo: Todo = {
+        title: value,
+        done: false,
+      };
+      this.todoItems.push(todo);
       console.log(this.todoItems);
       storage.save(this.todoItems);
       this.initTodoText();
@@ -76,6 +86,13 @@ export default Vue.extend({
     // 로컬 저장소의 데이터를 불러오는 함수
     fetchTodoItems() {
       this.todoItems = storage.fetch();
+    },
+    toggleTodoItemComplete(todoItem: Todo, index: number) {
+      this.todoItems.splice(index, 1, {
+        ...todoItem,
+        done: !todoItem.done,
+      });
+      storage.save(this.todoItems);
     },
   },
   created() {
