@@ -1,19 +1,35 @@
 <template>
   <div>
-    <list-item></list-item>
+    <list-item :items="newsItems"></list-item>
   </div>
 </template>
 
 <script>
 import ListItem from '../components/ListItem.vue';
+import { fetchNews } from '@/api';
 
 export default {
   components: {
-    ListItem
+    ListItem,
   },
-}
+
+  data() {
+    return {
+      newsItems: [],
+    };
+  },
+
+  methods: {
+    async fetchNewsItems() {
+      const response = await fetchNews();
+      console.log(response.data);
+      this.newsItems = response.data;
+    },
+  },
+  created() {
+    this.fetchNewsItems();
+  },
+};
 </script>
 
-<style>
-
-</style>
+<style></style>

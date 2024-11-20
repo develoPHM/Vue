@@ -5,18 +5,17 @@
       <div slot="userName">{{ fetchedUser.id }}</div>
       <span slot="userKarma">{{ fetchedUser.karma }} karma</span>
     </user-profile>
-
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex';
 import UserProfile from '../components/UserProfile.vue';
-import bus from '../utils/bus.js';
+import bus from '../utils/bus.ts';
 
 export default {
   components: {
-    UserProfile
+    UserProfile,
   },
   created() {
     bus.$emit('off:progress');
@@ -24,7 +23,7 @@ export default {
   computed: {
     ...mapGetters(['fetchedUser']),
   },
-}
+};
 </script>
 
 <style scoped>
