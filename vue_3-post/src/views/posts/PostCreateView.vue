@@ -1,13 +1,13 @@
 <template>
 	<div>
-		<h2>게시글 수정</h2>
+		<h2>게시글 등록</h2>
 		<hr class="my-4" />
 		<form @submit.prevent="save">
 			<div class="mb-3">
 				<label for="title" class="form-label"> 제목</label>
 				<input
 					v-model="form.title"
-					type="email"
+					type="text"
 					class="form-control"
 					id="title"
 				/>
@@ -45,19 +45,18 @@ const form = ref({
 	title: null,
 	content: null,
 });
-const goListPage = () => router.push({ name: 'PostList' });
 const save = () => {
 	try {
-		const data = {
+		createPost({
 			...form.value,
 			createdAt: Date.now(),
-		};
-		console.log(data);
-		createPost(data);
+		});
+		router.push({ name: 'PostList' });
 	} catch (error) {
 		console.log(error);
 	}
 };
+const goListPage = () => router.push({ name: 'PostList' });
 </script>
 
 <style lang="scss" scoped></style>
