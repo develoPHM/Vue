@@ -17,6 +17,7 @@
 				<li class="page-item">
 					<a
 						class="page-link"
+						:class="{ disabled: params._page === 1 }"
 						href="#"
 						aria-label="Previous"
 						@click.prevent="--params._page"
@@ -34,7 +35,7 @@
 						page
 					}}</a>
 				</li>
-				<li class="page-item">
+				<li class="page-item" :class="{ disabled: params._page === pageCount }">
 					<a
 						class="page-link"
 						href="#"
