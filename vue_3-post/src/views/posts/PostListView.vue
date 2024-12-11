@@ -1,6 +1,22 @@
 <template>
 	<div>
 		<h2>게시글 목록</h2>
+		<form @submit.prevent>
+			<div class="row g-3">
+				<div class="col">
+					<!--필터 구현하는 부분-->
+					<input v-model="params.title_like" type="text" class="form-control" />
+				</div>
+				<!-- 몇개씩 볼지 정하는 부분-->
+				<div class="col">
+					<select v-model="params._limit" class="form-select">
+						<option value="3">3개씩 보기</option>
+						<option value="6">6개씩 보기</option>
+						<option value="9">9개씩 보기</option>
+					</select>
+				</div>
+			</div>
+		</form>
 		<hr class="my-4" />
 		<div class="row g-3">
 			<div v-for="post in posts" :key="post.id" class="col-4">
@@ -12,6 +28,7 @@
 				></PostItem>
 			</div>
 		</div>
+		<!--페이징 구현하는 부분-->
 		<nav class="mt-5" aria-label="Page navigation example">
 			<ul class="pagination justify-content-center">
 				<li class="page-item">
@@ -48,6 +65,7 @@
 			</ul>
 		</nav>
 		<hr class="my-5" />
+		<!--게시글 미리보는 부분-->
 		<AppCard>
 			<PostDetailView :id="1"></PostDetailView>
 		</AppCard>
@@ -64,10 +82,11 @@ import { useRouter } from 'vue-router';
 const router = useRouter();
 const posts = ref([]);
 const params = ref({
-	_sort: 'createdAt',
-	_order: 'desc',
-	_limit: 3,
-	_page: 1,
+	_sort: 'createdAt', // 날짜별로 정렬
+	_order: 'desc', // 내림차순
+	_limit: 3, // 최대 몇개 띄울지
+	_page: 1, // 페이지숫자
+	title_like: '', // 필터
 });
 // pagination
 const totalCount = ref(0);
