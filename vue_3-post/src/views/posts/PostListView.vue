@@ -102,7 +102,6 @@ const fetchPosts = async () => {
 		console.error(err);
 	}
 };
-console.log(totalCount.value);
 fetchPosts();
 watchEffect(fetchPosts);
 const goPage = id => {
