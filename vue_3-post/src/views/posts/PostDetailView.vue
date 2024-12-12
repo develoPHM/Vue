@@ -30,7 +30,7 @@ import { useRouter } from 'vue-router';
 import { deletePost, getPostById } from '@/api/post';
 import { ref } from 'vue';
 const props = defineProps({
-	id: Number,
+	id: [String, Number],
 });
 /**
  * ref
