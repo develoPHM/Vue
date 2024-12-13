@@ -1,41 +1,32 @@
 <template>
 	<div>
 		<h2>게시글 목록</h2>
-		<form @submit.prevent>
-			<div class="row g-3">
-				<div class="col">
-					<!--필터 구현하는 부분-->
-					<input v-model="params.title_like" type="text" class="form-control" />
-				</div>
-				<!-- 몇개씩 볼지 정하는 부분-->
-				<div class="col">
-					<select v-model="params._limit" class="form-select">
-						<option value="3">3개씩 보기</option>
-						<option value="6">6개씩 보기</option>
-						<option value="9">9개씩 보기</option>
-					</select>
-				</div>
-			</div>
-		</form>
 		<hr class="my-4" />
-		<div class="row g-3">
-			<div v-for="post in posts" :key="post.id" class="col-4">
+		<PostFilter
+			v-model:title="params.title_like"
+			v-model:limit="params._limit"
+		></PostFilter>
+
+		<hr class="my-4" />
+		<AppGrid :items="posts">
+			<template v-slot="{ item }">
 				<PostItem
-					:title="post.title"
-					:content="post.content"
-					:created-at="post.createdAt"
-					@click="goPage(post.id)"
+					:title="item.title"
+					:content="item.content"
+					:created-at="item.createdAt"
+					@click="goPage(item.id)"
 				></PostItem>
-			</div>
-		</div>
+			</template>
+		</AppGrid>
+
 		<AppPagination
-			:pageCount="pageCount"
 			:currentPage="params._page"
+			:pageCount="pageCount"
 			@page="page => (params._page = page)"
 		/>
-		<hr class="my-5" />
 		<!--게시글 미리보는 부분-->
 		<template v-if="posts && posts.length > 0">
+			<hr class="my-5" />
 			<AppCard>
 				<PostDetailView :id="posts[0].id"></PostDetailView>
 			</AppCard>
@@ -48,9 +39,12 @@ import PostItem from '@/components/posts/PostItem.vue';
 import PostDetailView from '@/views/posts/PostDetailView.vue';
 import AppCard from '@/components/AppCard.vue';
 import AppPagination from '@/components/AppPagination.vue';
+import AppGrid from '@/components/AppGrid.vue';
+import PostFilter from '@/components/posts/PostFilter.vue';
 import { getPosts } from '@/api/post';
 import { computed, ref, watchEffect } from 'vue';
 import { useRouter } from 'vue-router';
+
 const router = useRouter();
 const posts = ref([]);
 const params = ref({
@@ -74,7 +68,7 @@ const fetchPosts = async () => {
 		console.error(err);
 	}
 };
-fetchPosts();
+// fetchPosts();
 watchEffect(fetchPosts);
 const goPage = id => {
 	// router.push(`/posts/${id}`);
@@ -83,10 +77,6 @@ const goPage = id => {
 		params: {
 			id,
 		},
-		query: {
-			searchText: 'hello',
-		},
-		hash: '#world',
 	});
 };
 </script>
