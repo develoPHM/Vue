@@ -20,11 +20,12 @@
 				</div>
 			</template>
 		</PostForm>
-		<AppAlert
-			:show="showAlert"
-			:message="alertMessage"
-			:type="alertType"
-		></AppAlert>
+		<!--		<AppAlert-->
+		<!--			:show="showAlert"-->
+		<!--			:message="alertMessage"-->
+		<!--			:type="alertType"-->
+		<!--		></AppAlert>-->
+		<AppAlert :items="alerts"></AppAlert>
 	</div>
 </template>
 
@@ -67,18 +68,14 @@ const edit = async () => {
 		// await router.push({ name: 'PostDetail', params: { id } });
 	} catch (err) {
 		console.error(err);
+		vAlert('수정실패');
 	}
 };
-// alert
-const showAlert = ref(false);
-const alertMessage = ref('');
-const alertType = ref('');
+const alerts = ref([]);
 const vAlert = (message, type = 'error') => {
-	showAlert.value = true;
-	alertMessage.value = message;
-	alertType.value = type;
+	alerts.value.push({ message, type });
 	setTimeout(() => {
-		showAlert.value = false;
+		alerts.value.shift();
 	}, 2000);
 };
 </script>
