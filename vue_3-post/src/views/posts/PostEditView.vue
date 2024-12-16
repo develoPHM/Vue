@@ -20,6 +20,11 @@
 				</div>
 			</template>
 		</PostForm>
+		<AppAlert
+			:show="showAlert"
+			:message="alertMessage"
+			:type="alertType"
+		></AppAlert>
 	</div>
 </template>
 
@@ -28,6 +33,7 @@ import { useRoute, useRouter } from 'vue-router';
 import { ref } from 'vue';
 import { getPostById, updatePost } from '@/api/post';
 import PostForm from '@/components/posts/PostForm.vue';
+import AppAlert from '@/components/AppAlert.vue';
 
 const router = useRouter();
 const route = useRoute();
@@ -42,6 +48,7 @@ const fetchPost = async () => {
 		setForm(data);
 	} catch (err) {
 		console.log(err);
+		vAlert('네트워크오류');
 	}
 };
 const setForm = ({ title, content, createdAt }) => {
@@ -56,10 +63,23 @@ const goDetailPage = () => {
 const edit = async () => {
 	try {
 		await updatePost(id, { ...form.value });
-		await router.push({ name: 'PostDetail', params: { id } });
+		vAlert('수정이 완료되었습니다.', 'success');
+		// await router.push({ name: 'PostDetail', params: { id } });
 	} catch (err) {
 		console.error(err);
 	}
+};
+// alert
+const showAlert = ref(false);
+const alertMessage = ref('');
+const alertType = ref('');
+const vAlert = (message, type = 'error') => {
+	showAlert.value = true;
+	alertMessage.value = message;
+	alertType.value = type;
+	setTimeout(() => {
+		showAlert.value = false;
+	}, 2000);
 };
 </script>
 
