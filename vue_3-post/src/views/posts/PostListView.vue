@@ -26,8 +26,12 @@
 			@page="page => (params._page = page)"
 		/>
 		<!-- Modal -->
-		<AppModal :show="show" title="게시글"></AppModal>
-
+		<PostModal
+			v-model="show"
+			:title="modalTitle"
+			:contents="modalContents"
+			:createdAt="modalCreatedAt"
+		/>
 		<!--게시글 미리보는 부분-->
 		<template v-if="posts && posts.length > 0">
 			<hr class="my-5" />
@@ -45,7 +49,7 @@ import AppCard from '@/components/AppCard.vue';
 import AppPagination from '@/components/AppPagination.vue';
 import AppGrid from '@/components/AppGrid.vue';
 import PostFilter from '@/components/posts/PostFilter.vue';
-import AppModal from '@/components/AppModal.vue';
+import PostModal from '@/components/posts/PostModal.vue';
 import { getPosts } from '@/api/post';
 import { computed, ref, watchEffect } from 'vue';
 import { useRouter } from 'vue-router';
@@ -86,9 +90,15 @@ const goPage = id => {
 };
 // modal
 const show = ref(false);
-const openModal = () => {
+const modalTitle = ref('');
+const modalContents = ref('');
+const modalCreatedAt = ref('');
+const openModal = ({ title, content, createdAt }) => {
 	show.value = true;
-}
+	modalTitle.value = title;
+	modalContents.value = content;
+	modalCreatedAt.value = createdAt;
+};
 </script>
 
 <style lang="scss" scoped></style>

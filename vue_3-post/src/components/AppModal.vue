@@ -1,5 +1,5 @@
 <template>
-	<div v-if="show">
+	<div v-if="modelValue">
 		<div class="modal-backdrop fade show"></div>
 		<div
 			class="modal fade show d-block"
@@ -11,12 +11,15 @@
 				<div class="modal-content">
 					<div class="modal-header">
 						<slot name="header">
-							<h5 class="modal-title fs-5" id="exampleModalLabel">{{ title }}</h5>
+							<h5 class="modal-title fs-5" id="exampleModalLabel">
+								{{ title }}
+							</h5>
 							<button
 								type="button"
 								class="btn-close"
 								data-bs-dismiss="modal"
 								aria-label="Close"
+								@click="$emit('update:modelValue', false)"
 							></button>
 						</slot>
 					</div>
@@ -25,14 +28,6 @@
 					</div>
 					<div class="modal-footer">
 						<slot name="actions"></slot>
-						<button
-							type="button"
-							class="btn btn-secondary"
-							data-bs-dismiss="modal"
-						>
-							Close
-						</button>
-						<button type="button" class="btn btn-primary">Save changes</button>
 					</div>
 				</div>
 			</div>
@@ -42,9 +37,10 @@
 
 <script setup>
 defineProps({
-	show: Boolean,
+	modelValue: Boolean,
 	title: String,
 });
+defineEmits(['close', 'update:modelValue']);
 </script>
 
 <style lang="scss" scoped></style>
