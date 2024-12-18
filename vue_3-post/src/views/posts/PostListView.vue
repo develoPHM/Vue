@@ -26,12 +26,14 @@
 			@page="page => (params._page = page)"
 		/>
 		<!-- Modal -->
-		<PostModal
-			v-model="show"
-			:title="modalTitle"
-			:contents="modalContents"
-			:createdAt="modalCreatedAt"
-		/>
+		<Teleport to="#modal">
+			<PostModal
+				v-model="show"
+				:title="modalTitle"
+				:contents="modalContents"
+				:createdAt="modalCreatedAt"
+			/>
+		</Teleport>
 		<!--게시글 미리보는 부분-->
 		<template v-if="posts && posts.length > 0">
 			<hr class="my-5" />
