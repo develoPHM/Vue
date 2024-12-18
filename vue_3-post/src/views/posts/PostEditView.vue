@@ -34,7 +34,7 @@ import { useRoute, useRouter } from 'vue-router';
 import { ref } from 'vue';
 import { getPostById, updatePost } from '@/api/post';
 import PostForm from '@/components/posts/PostForm.vue';
-import AppAlert from '@/components/AppAlert.vue';
+// import AppAlert from '@/components/app/AppAlert.vue';
 
 const router = useRouter();
 const route = useRoute();

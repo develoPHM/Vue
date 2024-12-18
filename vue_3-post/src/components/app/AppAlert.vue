@@ -21,7 +21,7 @@ defineProps({
 const typeStyle = type => (type === 'error' ? 'alert-danger' : 'alert-primary');
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .app-alert {
 	position: fixed;
 	top: 10px;

@@ -43,4 +43,4 @@ defineProps({
 defineEmits(['close', 'update:modelValue']);
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped></style>

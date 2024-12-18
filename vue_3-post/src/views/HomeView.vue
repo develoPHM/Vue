@@ -3,9 +3,7 @@
 		<h2>HomeView</h2>
 		<p>{{ $route.path }}</p>
 		<p>{{ $route.name }}</p>
-		<button class="btn btn-primary" @click="goAboutPage">
-			About 으로 이동
-		</button>
+		<button class="btn btn-primary" @click="goAboutPage">About으로 이동</button>
 		<hr class="my-4" />
 		<AppGrid :items="items" v-slot="{ item }">
 			<AppCard>{{ item }}</AppCard>
@@ -27,8 +25,8 @@ export default {
 <script setup>
 import { useRouter } from 'vue-router';
 import { inject, ref } from 'vue';
-import AppCard from '@/components/AppCard.vue';
-import AppGrid from '@/components/AppGrid.vue';
+// import AppCard from '@/components/app/AppCard.vue';
+// import AppGrid from '@/components/app/AppGrid.vue';
 
 const router = useRouter();
 const goAboutPage = () => {
