@@ -4,10 +4,12 @@ import router from '@/router';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import globalComponents from '@/plugins/global-components';
+import focus from '@/directives/focus';
 const app = createApp(App);
 app.use(router);
 app.mount('#app');
 app.use(globalComponents);
+app.directive('focus', focus);
 
 import 'bootstrap/dist/js/bootstrap.js';
 import funcPlugins from '@/plugins/func';
