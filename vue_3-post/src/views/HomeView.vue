@@ -9,7 +9,7 @@
 			<AppCard>{{ item }}</AppCard>
 		</AppGrid>
 		<hr class="my-4" />
-		<h2>{{ $person.name }}</h2>
+		<!--		<h2>{{ $person.name }}</h2>-->
 		<button class="btn btn-primary" @click="person.say">click duck</button>
 	</div>
 </template>
