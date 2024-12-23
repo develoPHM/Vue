@@ -7,9 +7,7 @@
 			v-model:limit="params._limit"
 		></PostFilter>
 		<hr class="my-4" />
-
 		<AppLoading v-if="loading" />
-
 		<AppError v-else-if="error" :message="error.message" />
 		<template v-else>
 			<AppGrid :items="posts">
