@@ -20,12 +20,6 @@
 				</div>
 			</template>
 		</PostForm>
-		<!--		<AppAlert-->
-		<!--			:show="showAlert"-->
-		<!--			:message="alertMessage"-->
-		<!--			:type="alertType"-->
-		<!--		></AppAlert>-->
-		<AppAlert :items="alerts"></AppAlert>
 	</div>
 </template>
 
@@ -34,7 +28,9 @@ import { useRoute, useRouter } from 'vue-router';
 import { ref } from 'vue';
 import { getPostById, updatePost } from '@/api/post';
 import PostForm from '@/components/posts/PostForm.vue';
-// import AppAlert from '@/components/app/AppAlert.vue';
+import { useAlert } from '@/composables/alert';
+
+const { vAlert, vSuccess } = useAlert();
 
 const router = useRouter();
 const route = useRoute();
@@ -64,19 +60,12 @@ const goDetailPage = () => {
 const edit = async () => {
 	try {
 		await updatePost(id, { ...form.value });
-		vAlert('수정이 완료되었습니다.', 'success');
-		// await router.push({ name: 'PostDetail', params: { id } });
+		vSuccess('수정이 완료되었습니다.');
+		await router.push({ name: 'PostDetail', params: { id } });
 	} catch (err) {
 		console.error(err);
 		vAlert('수정실패');
 	}
-};
-const alerts = ref([]);
-const vAlert = (message, type = 'error') => {
-	alerts.value.push({ message, type });
-	setTimeout(() => {
-		alerts.value.shift();
-	}, 2000);
 };
 </script>
 
