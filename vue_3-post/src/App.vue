@@ -8,7 +8,8 @@
 import TheHeader from '@/components/layouts/TheHeader.vue';
 import TheView from '@/components/layouts/TheView.vue';
 import { useAlert } from '@/composables/alert';
-const { alerts } = useAlert;
+import AppAlert from '@/components/app/AppAlert.vue';
+const { alerts } = useAlert();
 </script>
 
 <style lang="scss" scoped></style>

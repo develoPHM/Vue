@@ -6,25 +6,29 @@
 			v-model:title="params.title_like"
 			v-model:limit="params._limit"
 		></PostFilter>
-
 		<hr class="my-4" />
-		<AppGrid :items="posts">
-			<template v-slot="{ item }">
-				<PostItem
-					:title="item.title"
-					:content="item.content"
-					:created-at="item.createdAt"
-					@click="goPage(item.id)"
-					@modal="openModal(item)"
-				></PostItem>
-			</template>
-		</AppGrid>
 
-		<AppPagination
-			:currentPage="params._page"
-			:pageCount="pageCount"
-			@page="page => (params._page = page)"
-		/>
+		<AppLoading v-if="loading" />
+
+		<AppError v-else-if="error" :message="error.message" />
+		<template v-else>
+			<AppGrid :items="posts">
+				<template v-slot="{ item }">
+					<PostItem
+						:title="item.title"
+						:content="item.content"
+						:created-at="item.createdAt"
+						@click="goPage(item.id)"
+						@modal="openModal(item)"
+					></PostItem>
+				</template>
+			</AppGrid>
+			<AppPagination
+				:currentPage="params._page"
+				:pageCount="pageCount"
+				@page="page => (params._page = page)"
+			/>
+		</template>
 		<!-- Modal -->
 		<Teleport to="#modal">
 			<PostModal
@@ -55,6 +59,8 @@ import PostModal from '@/components/posts/PostModal.vue';
 import { getPosts } from '@/api/post';
 import { computed, ref, watchEffect } from 'vue';
 import { useRouter } from 'vue-router';
+import AppLoading from '@/components/app/AppLoading.vue';
+import AppError from '@/components/app/AppError.vue';
 
 const router = useRouter();
 const posts = ref([]);
@@ -65,6 +71,8 @@ const params = ref({
 	_page: 1, // 페이지숫자
 	title_like: '', // 필터
 });
+const error = ref(null);
+const loading = ref(false);
 // pagination
 const totalCount = ref(0);
 const pageCount = computed(() =>
@@ -72,11 +80,15 @@ const pageCount = computed(() =>
 );
 const fetchPosts = async () => {
 	try {
+		loading.value = true;
 		const { data, headers } = await getPosts(params.value);
 		posts.value = data;
 		totalCount.value = parseInt(headers['x-total-count']);
 	} catch (err) {
 		console.error(err);
+		error.value = err;
+	} finally {
+		loading.value = false;
 	}
 };
 // fetchPosts();

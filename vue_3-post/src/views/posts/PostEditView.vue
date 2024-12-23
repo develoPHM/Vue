@@ -48,24 +48,23 @@ const fetchPost = async () => {
 		vAlert('네트워크오류');
 	}
 };
-const setForm = ({ title, content, createdAt }) => {
+const setForm = ({ title, content }) => {
 	form.value.title = title;
 	form.value.content = content;
-	form.value.createdAt = createdAt;
 };
 fetchPost();
-const goDetailPage = () => {
-	router.push({ name: 'PostDetail', params: { id } });
-};
 const edit = async () => {
 	try {
 		await updatePost(id, { ...form.value });
-		vSuccess('수정이 완료되었습니다.');
 		await router.push({ name: 'PostDetail', params: { id } });
+		vSuccess('수정이 완료되었습니다.');
 	} catch (err) {
 		console.error(err);
 		vAlert('수정실패');
 	}
+};
+const goDetailPage = () => {
+	router.push({ name: 'PostDetail', params: { id } });
 };
 </script>
 
