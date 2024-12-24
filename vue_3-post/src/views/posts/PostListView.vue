@@ -49,19 +49,18 @@
 <script setup>
 import PostItem from '@/components/posts/PostItem.vue';
 import PostDetailView from '@/views/posts/PostDetailView.vue';
-// import AppCard from '@/components/app/AppCard.vue';
-// import AppPagination from '@/components/app/AppPagination.vue';
-// import AppGrid from '@/components/app/AppGrid.vue';
+import AppCard from '@/components/app/AppCard.vue';
+import AppPagination from '@/components/app/AppPagination.vue';
+import AppGrid from '@/components/app/AppGrid.vue';
 import PostFilter from '@/components/posts/PostFilter.vue';
 import PostModal from '@/components/posts/PostModal.vue';
-import { getPosts } from '@/api/post';
-import { computed, ref, watchEffect } from 'vue';
+import { computed, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import AppLoading from '@/components/app/AppLoading.vue';
 import AppError from '@/components/app/AppError.vue';
+import { useAxios } from '@/hooks/useAxios';
 
 const router = useRouter();
-const posts = ref([]);
 const params = ref({
 	_sort: 'createdAt', // 날짜별로 정렬
 	_order: 'desc', // 내림차순
@@ -69,28 +68,20 @@ const params = ref({
 	_page: 1, // 페이지숫자
 	title_like: '', // 필터
 });
-const error = ref(null);
-const loading = ref(false);
 // pagination
-const totalCount = ref(0);
+const totalCount = computed(() => response.value.headers['x-total-count']);
+console.log('total', totalCount);
 const pageCount = computed(() =>
 	Math.ceil(totalCount.value / params.value._limit),
 );
-const fetchPosts = async () => {
-	try {
-		loading.value = true;
-		const { data, headers } = await getPosts(params.value);
-		posts.value = data;
-		totalCount.value = parseInt(headers['x-total-count']);
-	} catch (err) {
-		console.error(err);
-		error.value = err;
-	} finally {
-		loading.value = false;
-	}
-};
-// fetchPosts();
-watchEffect(fetchPosts);
+
+const {
+	response,
+	data: posts,
+	error,
+	loading,
+} = useAxios('/posts', { params });
+
 const goPage = id => {
 	// router.push(`/posts/${id}`);
 	router.push({

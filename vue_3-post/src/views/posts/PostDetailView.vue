@@ -31,48 +31,16 @@
 
 <script setup>
 import { useRouter } from 'vue-router';
-import { deletePost, getPostById } from '@/api/post';
-import { ref } from 'vue';
+import { deletePost } from '@/api/post';
 import AppError from '@/components/app/AppError.vue';
 import AppLoading from '@/components/app/AppLoading.vue';
+import { useAxios } from '@/hooks/useAxios';
+const router = useRouter();
 const props = defineProps({
 	id: [String, Number],
 });
-/**
- * ref
- * 장) 객체 할당 가능
- * 단) form.value.title, form.value.content
- *
- * reactive
- * 장) form.value.title, form.value.content
- * 단) 객체 할당 불가능
- */
-const router = useRouter();
-const post = ref({
-	title: null,
-	content: null,
-	created_at: null,
-});
-const error = ref(null);
-const loading = ref(false);
-const fetchPost = async () => {
-	try {
-		loading.value = true;
-		const { data } = await getPostById(props.id);
-		setPost(data);
-	} catch (err) {
-		console.error(err);
-		error.value = err;
-	} finally {
-		loading.value = false;
-	}
-};
-const setPost = ({ title, content, createdAt }) => {
-	post.value.title = title;
-	post.value.content = content;
-	post.value.created_at = createdAt;
-};
-fetchPost();
+
+const { error, loading, data: post } = useAxios(`posts/${props.id}`);
 const remove = async () => {
 	try {
 		if (confirm('삭제하시겠어요?')) {
