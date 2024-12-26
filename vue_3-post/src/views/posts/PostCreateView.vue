@@ -48,25 +48,26 @@ const form = ref({
 	content: null,
 });
 
-const { error, loading   } = useAxios(
+const { error, loading, execute } = useAxios(
 	'/posts',
 	{
 		method: 'post',
-		data: { ...form.value, createdAt: Date.now() },
 	},
 	{
 		immediate: false,
 		onSuccess: () => {
 			router.push({ name: 'PostList' });
-			vSuccess('등록이 완료되었습니다.!');
+			vSuccess('등록이 완료되었습니다.');
 		},
 		onError: err => {
 			vAlert(err.message);
 		},
 	},
 );
+const save = async () => {
+	execute({ ...form.value, createdAt: Date.now() });
+};
 
-const save = async () => {};
 const goListPage = () => router.push({ name: 'PostList' });
 </script>
 
