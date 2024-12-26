@@ -35,12 +35,14 @@ import { deletePost } from '@/api/post';
 import AppError from '@/components/app/AppError.vue';
 import AppLoading from '@/components/app/AppLoading.vue';
 import { useAxios } from '@/hooks/useAxios';
+import { computed } from 'vue';
 const router = useRouter();
 const props = defineProps({
 	id: [String, Number],
 });
 
-const { error, loading, data: post } = useAxios(`posts/${props.id}`);
+const url = computed(() => `posts/${props.id}`);
+const { error, loading, data: post } = useAxios(url);
 const remove = async () => {
 	try {
 		if (confirm('삭제하시겠어요?')) {

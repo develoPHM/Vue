@@ -18,6 +18,7 @@
 						:created-at="item.createdAt"
 						@click="goPage(item.id)"
 						@modal="openModal(item)"
+						@preview="selectPreview(item.id)"
 					></PostItem>
 				</template>
 			</AppGrid>
@@ -37,10 +38,10 @@
 			/>
 		</Teleport>
 		<!--게시글 미리보는 부분-->
-		<template v-if="posts && posts.length > 0">
+		<template v-if="previewId">
 			<hr class="my-5" />
 			<AppCard>
-				<PostDetailView :id="posts[0].id"></PostDetailView>
+				<PostDetailView :id="previewId"></PostDetailView>
 			</AppCard>
 		</template>
 	</div>
@@ -61,6 +62,8 @@ import AppError from '@/components/app/AppError.vue';
 import { useAxios } from '@/hooks/useAxios';
 
 const router = useRouter();
+const previewId = ref(null);
+const selectPreview = id => (previewId.value = id);
 const params = ref({
 	_sort: 'createdAt', // 날짜별로 정렬
 	_order: 'desc', // 내림차순
