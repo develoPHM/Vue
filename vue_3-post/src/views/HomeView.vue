@@ -18,7 +18,7 @@
 </template>
 <script setup>
 import { useRouter } from 'vue-router';
-import { reactive, ref, toRef, toRefs } from 'vue';
+import { reactive, ref, toRef } from 'vue';
 
 const router = useRouter();
 const goAboutPage = () => {
@@ -30,9 +30,9 @@ const position = reactive({
 	x: 100,
 	y: 1000,
 });
-// const x = toRef(position, 'x');
-// const y = toRef(position, 'y');
-const { x, y } = toRefs(position);
+const x = toRef(position, 'x');
+const y = toRef(position, 'y');
+// const { x, y } = toRefs(position);
 </script>
 
 <style lang="scss" scoped></style>

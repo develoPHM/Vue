@@ -5,9 +5,20 @@
 		<button class="btn btn-primary" @click="$router.push('/')">
 			Home 으로 이동
 		</button>
+		<h2>store</h2>
+		<p>storeToRefs: {{ counter }}</p>
+		<p>counter: {{ store.counter }}</p>
+		<p>doubleCount: {{ doubleCount }}</p>
+		<button @click="increment">Increment</button>
 	</div>
 </template>
 
-<script setup></script>
+<script setup>
+import { useCounterStore } from '@/stores/counter';
+const store = useCounterStore();
+import { storeToRefs } from 'pinia';
+const { counter, doubleCount } = storeToRefs(store);
+const { increment } = store;
+</script>
 
 <style lang="scss" scoped></style>
