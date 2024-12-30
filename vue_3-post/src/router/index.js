@@ -9,6 +9,7 @@ import NotFoundView from '@/views/NotFoundView.vue';
 import NestedView from '@/views/nested/NestedView.vue';
 import NestedOneView from '@/views/nested/NestedOneView.vue';
 import NestedTwoView from '@/views/nested/NestedTwoView.vue';
+import MyPage from '@/views/MyPage.vue';
 
 const routes = [
 	{
@@ -62,6 +63,14 @@ const routes = [
 		],
 	},
 	{
+		path: '/my',
+		name: 'MyPage',
+		component: MyPage,
+		// beforeEnter: (to, from) => {
+		// 	console.log(to, from);
+		// },
+	},
+	{
 		path: '/:pathMatch(.*)*',
 		name: 'NotFound',
 		component: NotFoundView,
@@ -72,5 +81,14 @@ const router = createRouter({
 	history: createWebHistory('/'),
 	routes,
 });
+
+// router.beforeEach((to, from) => {
+// 	console.log(to, from);
+// 	if (to.name === 'MyPage') {
+// 		return router.push({ name: 'Home' });
+// return { name: 'Home' };
+// return '/posts';
+// }
+// });
 
 export default router;
