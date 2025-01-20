@@ -2,15 +2,15 @@
   <div class="q-pa-xl">
     <AppCard>
       <template #header>
-        <div class="text-h5 text-weight-medium">Vue 완벽 마스터 기본편</div>
+        <div class="text-h5 text-weight-medium">{{ course?.title }}</div>
         <div class="flex q-gutter-x-sm items-center q-mt-sm text-grey-8">
           <span class="flex items-center">
             <q-icon name="star" size="16px" color="orange" />
-            <span>5.0</span>
+            <span>{{ course?.rating }}</span>
           </span>
-          <span> 507개의 수강평 </span>
+          <span>{{ course?.reviewsCount }}</span>
           <span>&middot;</span>
-          <span>12141명의 수강생</span>
+          <span>{{ course?.studentCount }}</span>
           <q-space />
           <a
             class="text-bold"
@@ -22,7 +22,7 @@
         </div>
       </template>
       <div class="q-mb-md">
-        <VideoPlayer />
+        <VideoPlayer :src="course?.video" />
       </div>
       <div class="row q-col-gutter-md">
         <div class="col-6">
@@ -31,7 +31,7 @@
             unelevated
             class="full-width"
             color="primary"
-            href="https://inf.run/yWHo"
+            :href="course?.inflearnUrl"
             target="_blank"
           />
         </div>
@@ -41,7 +41,7 @@
             unelevated
             class="full-width"
             color="red"
-            href="https://edu.gymcoding.co/p/products"
+            :href="course?.gymcodingUrl"
             target="_blank"
           />
         </div>
@@ -56,6 +56,10 @@
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const route = useRoute();
+const courseSlug = route.params.courseSlug as string;
+const { course } = useCourse(courseSlug);
+</script>
 
 <style scoped></style>

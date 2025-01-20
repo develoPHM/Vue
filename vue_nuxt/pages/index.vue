@@ -1,22 +1,23 @@
 <template>
   <q-page padding>
     <div class="q-my-xl tex-center">
-      <div class="text-h4">토끼</div>
-      <p class="q-mt-sm text-grey-8">뉴진스 토끼</p>
+      <div class="text-h4">제목</div>
+      <p class="q-mt-sm text-grey-8">설명</p>
     </div>
     <div class="row q-col-gutter-lg">
       <div
-        v-for="{ courseSlug, title, subtitle, thumbnail } in courses"
+        v-for="{ courseSlug, title, subtitle, thumbnail, path } in courses"
         :key="courseSlug"
         class="col-12 col-md-4 col-sm-6"
       >
-        <RouterLink :to="`/course/${courseSlug}`">
+        <NuxtLink v-slot="{ navigate }" custom :to="path">
           <CourseCard
             :title="title"
             :subtitle="subtitle"
             :thumbnail="thumbnail"
+            @click="navigate"
           />
-        </RouterLink>
+        </NuxtLink>
       </div>
     </div>
   </q-page>
