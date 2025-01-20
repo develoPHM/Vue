@@ -52,6 +52,23 @@
         알아야하는 내용을 빠짐없이 다루면서도 쉽고, 자세하고, 깊게 내용을
         다룹니다.
       </p>
+      <template #footer>
+        <q-btn
+          v-if="prevCourse"
+          :to="prevCourse.path"
+          label="이전 강의"
+          color="primary"
+          unelevated
+        />
+        <q-space />
+        <q-btn
+          v-if="nextCourse"
+          :to="nextCourse.path"
+          label="다음 강의"
+          color="primary"
+          unelevated
+        />
+      </template>
     </AppCard>
   </div>
 </template>
@@ -59,7 +76,8 @@
 <script setup lang="ts">
 const route = useRoute();
 const courseSlug = route.params.courseSlug as string;
-const { course } = useCourse(courseSlug);
+const { course, prevCourse, nextCourse } = useCourse(courseSlug);
+
 </script>
 
 <style scoped></style>
