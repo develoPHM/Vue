@@ -53,21 +53,23 @@
         다룹니다.
       </p>
       <template #footer>
-        <q-btn
-          v-if="prevCourse"
-          :to="prevCourse.path"
-          label="이전 강의"
-          color="primary"
-          unelevated
-        />
-        <q-space />
-        <q-btn
-          v-if="nextCourse"
-          :to="nextCourse.path"
-          label="다음 강의"
-          color="primary"
-          unelevated
-        />
+        <ClientOnly>
+          <q-btn
+            v-if="prevCourse"
+            :to="prevCourse.path"
+            label="이전 강의"
+            color="primary"
+            unelevated
+          />
+          <q-space />
+          <q-btn
+            v-if="nextCourse"
+            :to="nextCourse.path"
+            label="다음 강의"
+            color="primary"
+            unelevated
+          />
+        </ClientOnly>
       </template>
     </AppCard>
   </div>
@@ -77,7 +79,11 @@
 const route = useRoute();
 const courseSlug = route.params.courseSlug as string;
 const { course, prevCourse, nextCourse } = useCourse(courseSlug);
-
+definePageMeta({
+  key: (route) => route.fullPath,
+  title: 'MyHomePage',
+});
+console.log('확인:', route.meta);
 </script>
 
 <style scoped></style>
