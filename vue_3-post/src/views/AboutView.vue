@@ -14,11 +14,16 @@
 </template>
 
 <script setup>
+import { useRoute } from 'vue-router';
 import { useCounterStore } from '@/stores/counter';
+
 const store = useCounterStore();
 import { storeToRefs } from 'pinia';
 const { counter, doubleCount } = storeToRefs(store);
 const { increment } = store;
+const route = useRoute();
+console.log('route.path: ', route.path);
+
 </script>
 
 <style lang="scss" scoped></style>
