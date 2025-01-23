@@ -3,4 +3,10 @@
     <NuxtPage />
   </NuxtLayout>
 </template>
-<script setup lang="ts"></script>
+<script setup lang="ts">
+
+const nuxtApp = useNuxtApp();
+console.log(nuxtApp);
+// provide 활용
+// nuxtApp.provide('hello', (msg: string) => `Hello ${msg}`);
+</script>

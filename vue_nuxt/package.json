@@ -28,6 +28,7 @@
     "nuxt-quasar-ui": "^2.1.9",
     "prettier": "^3.4.2",
     "typescript": "^5.7.3",
+    "vue-i18n": "^11.0.1",
     "vue-tsc": "^2.1.10"
   }
 }

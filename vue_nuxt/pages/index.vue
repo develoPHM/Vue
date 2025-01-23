@@ -1,7 +1,7 @@
 <template>
   <q-page padding>
     <div class="q-my-xl tex-center">
-      <div class="text-h4">제목</div>
+      <div class="text-h4">제목 {{ $hello('플러그인임') }}</div>
       <p class="q-mt-sm text-grey-8">설명</p>
     </div>
     <div class="row q-col-gutter-lg">
