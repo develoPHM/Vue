@@ -10,6 +10,7 @@
     <p class="text-subtitle2">
       {{ JSON.stringify(globalError) }}
     </p>
+    <q-btn label="go Home" size="lg" color="primary" no-caps @click="handleError"/>
   </div>
 </template>
 
@@ -22,6 +23,8 @@ defineProps({
 });
 
 const globalError = useError();
+// const handleError = () => clearError();
+const handleError = () => clearError({ redirect: '/'});
 </script>
 
 <style scoped></style>
