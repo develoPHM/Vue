@@ -4,7 +4,8 @@
       <div class="col-3">
         <q-card>
           <q-item-label header
-            >강의 로드맵{{ $hello('gymcoding') }}</q-item-label
+          >강의 로드맵{{ $hello('gymcoding') }}
+          </q-item-label
           >
           <q-list bordered separator>
             <q-item
@@ -17,6 +18,9 @@
               <q-item-section>
                 {{ index + 1 }}. {{ course.title }}
               </q-item-section>
+            </q-item>
+            <q-item v-ripple clickable to="/course/empty">
+              <q-item-section> Empty Course (throw error)</q-item-section>
             </q-item>
             <!--
             <NuxtLink v-slot="{ navigate }" custom to="/course/prefetching-1">
@@ -33,12 +37,12 @@
         </q-card>
       </div>
       <div class="col">
-        <NuxtPage />
+        <NuxtPage/>
       </div>
     </div>
   </q-page>
 </template>
 
 <script setup lang="ts">
-const { courses } = useCourses();
+const {courses} = useCourses();
 </script>
