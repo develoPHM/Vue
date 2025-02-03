@@ -97,12 +97,12 @@
 const route = useRoute();
 const courseSlug = route.params.courseSlug as string;
 const { course, prevCourse, nextCourse } = useCourse(courseSlug);
-console.log('before error:', process.server)
+// console.log('before error:', process.server)
 if (!course) {
   throw createError({
     statusCode: 404,
     statusMessage: 'Course not found',
-    fatal: true,
+    // fatal: true,
   })
 }
 // const title = ref('');
@@ -111,7 +111,7 @@ definePageMeta({
   // title: title.value,
   title: 'My home page',
   pageType: '',
-  keepalive: true,
+  // keepalive: true,
   alias: ['/lecture/:courseSlug'],
   // layout: 'same-layout',
 });
