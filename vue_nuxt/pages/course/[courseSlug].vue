@@ -52,42 +52,44 @@
           unelevated
           :outline="completed ? false : true"
           :icon="completed ? 'check' : undefined"
-          @click="toggleCompelte"
+          @click="toggleComplete"
         />
-        <q-input
-          v-model="memo"
-          type="textarea"
-          outlined
-          dense
-          placeholder="메모를 작성해주세요."
-          rows="3"
-          autogrow
-        />
+        <ClientOnly>
+          <q-input
+            v-model="memo"
+            type="textarea"
+            outlined
+            dense
+            placeholder="메모를 작성해주세요."
+            rows="3"
+            autogrow
+          />
+        </ClientOnly>
       </q-form>
       <template #footer>
+        <q-btn
+          v-if="prevCourse"
+          label="이전 강의"
+          color="primary"
+          unelevated
+          @click="movePage(prevCourse.path)"
+        />
         <ClientOnly>
-          <q-btn
-            v-if="prevCourse"
-            label="이전 강의"
-            color="primary"
-            unelevated
-            @click="movePage(prevCourse.path)"
-          />
           <q-btn
             label="쿼리 추가"
             color="dark"
             unelevated
             :to="{ path: $route.path, query: { timestamp: Date.now() } }"
           />
-          <q-space />
-          <q-btn
-            v-if="nextCourse"
-            label="다음 강의"
-            color="primary"
-            unelevated
-            @click="movePage(nextCourse.path)"
-          />
         </ClientOnly>
+        <q-space />
+        <q-btn
+          v-if="nextCourse"
+          label="다음 강의"
+          color="primary"
+          unelevated
+          @click="movePage(nextCourse.path)"
+        />
       </template>
     </AppCard>
   </div>
@@ -97,14 +99,16 @@
 const route = useRoute();
 const courseSlug = route.params.courseSlug as string;
 const { course, prevCourse, nextCourse } = useCourse(courseSlug);
-// console.log('before error:', process.server)
+
 if (!course) {
   throw createError({
     statusCode: 404,
     statusMessage: 'Course not found',
     // fatal: true,
-  })
+  });
 }
+
+console.log('[courseSlug].vue 컴포넌트 setup hooks');
 // const title = ref('');
 definePageMeta({
   key: (route) => route.fullPath,
@@ -121,9 +125,13 @@ const completed = ref(false);
 const movePage = async (path: string) => {
   await navigateTo(path);
 };
-const toggleCompelte = () => {
-  $fetch('/api/error')
-}
+
+const toggleComplete = () => {
+  // $fetch('/api/error');
+  // showError('에러가 발생했습니다.');
+  completed.value = !completed.value;
+  throw createError('에러가 발생했습니다.');
+};
 </script>
 
 <style scoped></style>
