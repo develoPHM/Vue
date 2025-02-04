@@ -1,4 +1,4 @@
-import type { User } from '~/types/user';
+import type { User, UserWithoutPassword } from '~/types/user';
 
 const users: User[] = [
   {
@@ -15,7 +15,8 @@ const users: User[] = [
   },
 ];
 
-export const getUser = (email: string, password: string) => {
+export const getUser = (email: string, password: string):
+  Maybe<UserWithoutPassword> => {
   const foundUser = users.find(
     (u) => u.email === email && u.password === password,
   );

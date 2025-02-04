@@ -2,15 +2,15 @@
   <q-layout view="hHh lpR fFf" class="bg-grey-2">
     <q-header elevated class="bg-dark text-white">
       <q-toolbar>
-        <q-toolbar-title> Vue & Nuxt Mastery Class </q-toolbar-title>
+        <q-toolbar-title> Vue & Nuxt Mastery Class</q-toolbar-title>
         <NuxtLink v-slot="{ navigate }" custom to="/">
-          <q-btn stretch flat :label="$t('home')" no-caps @click="navigate" />
+          <q-btn stretch flat :label="$t('home')" no-caps @click="navigate"/>
         </NuxtLink>
-        <q-separator dark vertical />
+        <q-separator dark vertical/>
         <NuxtLink v-slot="{ navigate }" custom to="/about">
-          <q-btn stretch flat :label="$t('about')" no-caps @click="navigate" />
+          <q-btn stretch flat :label="$t('about')" no-caps @click="navigate"/>
         </NuxtLink>
-        <q-separator dark vertical />
+        <q-separator dark vertical/>
 
         <q-btn
           stretch
@@ -19,11 +19,11 @@
           no-caps
           @click="moveYoutube"
         />
-        <q-separator dark vertical />
+        <q-separator dark vertical/>
         <NuxtLink v-slot="{ navigate }" custom to="/admin">
-          <q-btn stretch flat :label="$t('admin')" no-caps @click="navigate" />
+          <q-btn stretch flat :label="$t('admin')" no-caps @click="navigate"/>
         </NuxtLink>
-        <q-separator dark vertical />
+        <q-separator dark vertical/>
         <q-btn-dropdown stretch flat no-caps :label="selectedLanguageName">
           <q-list padding dense>
             <q-item
@@ -40,8 +40,8 @@
             </q-item>
           </q-list>
         </q-btn-dropdown>
-        <q-separator dark vertical />
-        <NuxtLink v-slot="{ navigate }" custom to="/login">
+        <q-separator dark vertical/>
+        <NuxtLink v-if="!isAuthenticated" v-slot="{ navigate }" custom to="/login">
           <q-btn
             stretch
             flat
@@ -50,23 +50,27 @@
             @click="navigate()"
           />
         </NuxtLink>
-        <NuxtLink v-slot="{ navigate }" custom to="/">
-          <q-btn
-            stretch
-            flat
-            :label="$t('logout')"
-            no-caps
-            @click="navigate()"
-          />
-        </NuxtLink>
+        <q-btn
+          v-else
+          stretch
+          flat
+          :label="$t('logout')"
+          no-caps
+          @click="signOut()"/>
       </q-toolbar>
     </q-header>
     <q-page-container :style="pageContainerStyle">
+      <q-banner v-if="isAuthenticated" class="bg-primary text-white">
+        {{ authUser }}
+      </q-banner>
       <slot></slot>
     </q-page-container>
   </q-layout>
 </template>
 <script setup lang="ts">
+const { authUser, isAuthenticated } = useAuthUser();
+const { signOut } = useAuth();
+
 const pageContainerStyle = computed(() => ({
   maxWidth: '1080px',
   margin: '0 auto',
