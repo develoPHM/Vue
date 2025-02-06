@@ -13,6 +13,7 @@
         <NuxtLink to="https://youtube.com/@gymcoding">
           NuxtLink Youtube
         </NuxtLink>
+
         <div class="q-gutter-y-sm q-mt-md">
           <div class="text-subtitle1 text-weight-bold">useState('counter')</div>
           <div>
@@ -42,6 +43,15 @@
             />
           </div>
         </div>
+
+        <div class="q-gutter-y-sm q-mt-md">
+          <div class="text-subtitle1 text-weight-bold">useCounterStore()</div>
+          <div>counter: {{ count }}</div>
+          <div>doubleCount: {{ doubleCount }}</div>
+          <q-btn
+            label="increment"
+            @click="counterStore.increment()"
+          />
       </div>
     </div>
   </q-page>
@@ -49,5 +59,6 @@
 
 <script setup lang="ts">
 const counter = useState<number>('counter', () => 1);
-const sameCounter = useState<number>('counter');
+const counterStore = useCounterStore();
+const { count, doubleCount } = storeToRefs(counterStore);
 </script>
