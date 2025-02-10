@@ -1,5 +1,5 @@
 import { useAuthUser } from './useAuthUser';
-import { getUser } from "~/composables/auth/userData";
+import { getUser } from './usersData';
 import type { UserWithoutPassword } from '~/types/user';
 
 export const useAuth = () => {

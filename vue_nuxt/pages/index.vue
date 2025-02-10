@@ -1,7 +1,7 @@
 <template>
   <q-page padding>
     <div class="q-my-xl text-center">
-      <PageTitle title='All Course' />
+      <PageTitle title="All Courses" />
       <PageDescription description="웹 개발 입문부터 실전까지 학습해보세요!" />
     </div>
     <div class="row q-col-gutter-lg">
@@ -25,6 +25,8 @@
 
 <script setup lang="ts">
 const { courses } = useCourses();
+
+console.log('index.vue', process.server);
 </script>
 
 <style scoped></style>

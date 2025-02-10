@@ -5,7 +5,7 @@
 </template>
 <script setup lang="ts">
 const nuxtApp = useNuxtApp();
-// console.log('nuxtApp: ', nuxtApp);
+console.log('nuxtApp: ', nuxtApp);
 
 // vue application instance
 // nuxtApp.vueApp.component()

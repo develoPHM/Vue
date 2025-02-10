@@ -8,9 +8,15 @@
     </p>
     <div class="text-h6">useError</div>
     <p class="text-subtitle2">
-      {{ JSON.stringify(globalError) }}
+      {{ JSON.stringify(globalEerror) }}
     </p>
-    <q-btn label="go Home" size="lg" color="primary" no-caps @click="handleError"/>
+    <q-btn
+      label="Go Home"
+      size="lg"
+      color="primary"
+      no-caps
+      @click="handleError"
+    />
   </div>
 </template>
 
@@ -22,9 +28,10 @@ defineProps({
   },
 });
 
-const globalError = useError();
+const globalEerror = useError();
+
 // const handleError = () => clearError();
-const handleError = () => clearError({ redirect: '/'});
+const handleError = () => clearError({ redirect: '/' });
 </script>
 
 <style scoped></style>

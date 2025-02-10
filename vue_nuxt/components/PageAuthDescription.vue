@@ -3,9 +3,7 @@
 </template>
 
 <script setup lang="ts">
-  defineProps<{ description: string }>();
+defineProps<{ description: string }>();
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

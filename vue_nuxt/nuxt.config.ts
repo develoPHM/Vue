@@ -7,12 +7,12 @@ export default defineNuxtConfig({
   },
   modules: ['nuxt-quasar-ui', '@pinia/nuxt'],
   quasar: {
-    plugins: ["Notify"],
+    plugins: ['Notify'],
     config: {
       notify: {
-        position: "top-right",
-      }
-    }
+        position: 'top-right',
+      },
+    },
   },
   imports: {
     presets: [
@@ -22,4 +22,5 @@ export default defineNuxtConfig({
       },
     ],
   },
+  ssr: true,
 });

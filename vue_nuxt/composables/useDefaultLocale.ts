@@ -1,7 +1,6 @@
 export const useDefaultLocale = (fallback = 'en') => {
   const locale = ref(fallback);
 
-  // locale.value = navigator.language
   if (process.server) {
     const reqLocale = useRequestHeaders()
       ['accept-language'].split(';')[0]
@@ -10,7 +9,7 @@ export const useDefaultLocale = (fallback = 'en') => {
       locale.value = reqLocale;
     }
   } else if (process.client) {
-    locale.value = navigator.language;
+    locale.value = navigator.language.split('-')[0];
   }
 
   return locale;

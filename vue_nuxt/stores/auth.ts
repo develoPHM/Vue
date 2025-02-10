@@ -1,5 +1,5 @@
-import type { UserWithoutPassword } from "~/types/user";
-import { getUser } from "~/composables/auth/userData";
+import { getUser } from '~/composables/auth/usersData';
+import type { UserWithoutPassword } from '~/types/user';
 
 export const useAuthStore = defineStore('auth', () => {
   const authUser = ref<Maybe<UserWithoutPassword>>();

@@ -118,22 +118,27 @@ definePageMeta({
   // keepalive: true,
   alias: ['/lecture/:courseSlug'],
   // layout: 'same-layout',
+  // validate: (route) => {
   middleware: (route) => {
     const courseSlug = route.params.courseSlug as string;
     const { course } = useCourse(courseSlug);
     if (!course) {
+      // return navigateTo('/');
+      // return false;
       return abortNavigation(
         createError({
           statusCode: 404,
           statusMessage: 'Course not found',
           fatal: true,
-        })
-      )
+        }),
+      );
     }
-  }
+    // return true;
+  },
 });
 const memo = ref('');
 const completed = ref(false);
+
 const movePage = async (path: string) => {
   await navigateTo(path);
 };
@@ -144,7 +149,6 @@ const toggleComplete = () => {
   completed.value = !completed.value;
   throw createError('에러가 발생했습니다.');
 };
-
 </script>
 
 <style scoped></style>

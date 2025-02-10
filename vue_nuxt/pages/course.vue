@@ -4,8 +4,7 @@
       <div class="col-3">
         <q-card>
           <q-item-label header
-          >강의 로드맵{{ $hello('gymcoding') }}
-          </q-item-label
+            >강의 로드맵{{ $hello('gymcoding') }}</q-item-label
           >
           <q-list bordered separator>
             <q-item
@@ -20,7 +19,7 @@
               </q-item-section>
             </q-item>
             <q-item v-ripple clickable to="/course/empty">
-              <q-item-section> Empty Course (throw error)</q-item-section>
+              <q-item-section> Empty Course (throw error) </q-item-section>
             </q-item>
             <!--
             <NuxtLink v-slot="{ navigate }" custom to="/course/prefetching-1">
@@ -38,17 +37,18 @@
       </div>
       <div class="col">
         <NuxtErrorBoundary>
-          <NuxtPage/>
+          <NuxtPage />
           <template #error="{ error }">
             <div class="flex flex-center column q-py-xl">
               <div class="text-h6 q-mb-lg">
                 {{ error }}
               </div>
               <q-btn
-                label="Rest"
+                label="Reset"
                 color="positive"
                 no-caps
-                @click="error.value = null"/>
+                @click="error.value = null"
+              />
             </div>
           </template>
         </NuxtErrorBoundary>
@@ -58,5 +58,5 @@
 </template>
 
 <script setup lang="ts">
-const {courses} = useCourses();
+const { courses } = useCourses();
 </script>
