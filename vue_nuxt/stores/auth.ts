@@ -1,10 +1,8 @@
-import { useAuthUser } from './useAuthUser';
+import type { UserWithoutPassword } from "~/types/user";
 import { getUser } from "~/composables/auth/userData";
-import type { UserWithoutPassword } from '~/types/user';
 
-export const useAuth = () => {
-  // const { authUser } = useAuthUser();
-  const authUser = useAuthUser();
+export const useAuthStore = defineStore('auth', () => {
+  const authUser = ref<Maybe<UserWithoutPassword>>();
 
   const signIn = (email: string, password: string) => {
     const foundUser = getUser(email, password);
@@ -24,7 +22,12 @@ export const useAuth = () => {
   const signOut = () => setUser(null);
 
   return {
+    user: authUser,
+    isAuthenticated: computed(() => !!authUser.value),
+    isAdmin: computed(() =>
+      !authUser.value ? false : authUser.value.roles.includes('ADMIN'),
+    ),
     signIn,
     signOut,
   };
-};
+});

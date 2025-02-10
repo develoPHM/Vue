@@ -1,8 +1,11 @@
 <template>
   <q-form class="q-gutter-lg" @submit.prevent="handleLoginSubmit">
-    <q-input v-model="form.email" filled label="email"/>
-    <q-input v-model="form.passwowrd" filled type="password" label="password"/>
+    <q-input v-model="form.email" filled label="email" />
+
+    <q-input v-model="form.passwowrd" filled type="password" label="password" />
+
     <div v-if="error" class="text-red text-center">{{ error.message }}</div>
+
     <div class="q-mt-lg">
       <q-btn
         class="full-width"
@@ -22,7 +25,9 @@ const emit = defineEmits<{
   success: [];
 }>();
 // const emit = defineEmits(['success']);
-const { signIn } = useAuth();
+
+const { signIn } = useAuthStore();
+
 const form = ref({
   email: '',
   passwowrd: '',
@@ -37,6 +42,7 @@ const handleLoginSubmit = () => {
 
     // login business logic
     signIn(form.value.email, form.value.passwowrd);
+
     emit('success');
   } catch (err: unknown) {
     if (err instanceof Error) {
